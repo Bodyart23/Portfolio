@@ -15,10 +15,13 @@ import {
 } from './contactFormValidation'
 import FormField from './FormField'
 
-const FORM_SUBMIT_ID =
-  import.meta.env.VITE_FORM_SUBMIT_ID ?? '6d4059a9eac2cc1417f31e020789f600'
-const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL ?? ''
-const FORM_SUBMIT_URL = `https://formsubmit.co/ajax/${encodeURIComponent(FORM_SUBMIT_ID)}`
+const FORM_SUBMIT_ID = import.meta.env.VITE_FORM_SUBMIT_ID?.trim() ?? ''
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL?.trim() ?? ''
+
+function getFormSubmitUrl(): string | null {
+  if (!FORM_SUBMIT_ID) return null
+  return `https://formsubmit.co/ajax/${encodeURIComponent(FORM_SUBMIT_ID)}`
+}
 const REQUEST_TIMEOUT_MS = 15_000
 const SUCCESS_MESSAGE_DURATION_MS = 5_000
 
@@ -95,6 +98,13 @@ export default function ContactForm() {
       return
     }
 
+    const formSubmitUrl = getFormSubmitUrl()
+    if (!formSubmitUrl) {
+      setSubmitStatus('error')
+      statusRef.current?.focus()
+      return
+    }
+
     const nameTrimmed = name.trim()
     const emailTrimmed = email.trim()
     const messageTrimmed = message.trim()
@@ -102,7 +112,7 @@ export default function ContactForm() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch(FORM_SUBMIT_URL, {
+      const response = await fetch(formSubmitUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
