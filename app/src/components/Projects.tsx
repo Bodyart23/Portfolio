@@ -1,6 +1,10 @@
-import { projects } from '../data/portfolio'
+import { useState } from 'react'
+import { projects, type Project } from '../data/portfolio'
+import ProjectLightbox from './ProjectLightbox'
 
 export default function Projects() {
+  const [activeProject, setActiveProject] = useState<Project | null>(null)
+
   return (
     <section className="projects" id="projects">
       <div className="section-heading">
@@ -13,7 +17,14 @@ export default function Projects() {
       <div className="projects-grid">
         {projects.map((project) => (
           <article key={project.title} className="project-card">
-            <img src={project.image} alt={project.title} loading="lazy" />
+            <button
+              type="button"
+              className="project-card__thumb"
+              onClick={() => setActiveProject(project)}
+              aria-label={`Open ${project.title} photo slideshow`}
+            >
+              <img src={project.images[0]} alt={project.title} loading="lazy" />
+            </button>
             <div className="project-info">
               <h3>{project.title}</h3>
               <p>{project.tech.join('  ')}</p>
@@ -39,6 +50,14 @@ export default function Projects() {
           </article>
         ))}
       </div>
+
+      {activeProject && (
+        <ProjectLightbox
+          title={activeProject.title}
+          images={activeProject.images}
+          onClose={() => setActiveProject(null)}
+        />
+      )}
     </section>
   )
 }

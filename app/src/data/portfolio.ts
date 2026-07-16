@@ -1,9 +1,16 @@
-import project1Large from '../assets/thumbnail-project-1-large.webp'
-import project2Large from '../assets/thumbnail-project-2-large.webp'
-import project3Large from '../assets/thumbnail-project-3-large.webp'
-import project4Large from '../assets/thumbnail-project-4-large.webp'
-import project5Large from '../assets/thumbnail-project-5-large.webp'
-import project6Large from '../assets/thumbnail-project-6-large.webp'
+import notes1 from '../assets/Notes-1.png'
+import notes2 from '../assets/Notes-2.png'
+import notes3 from '../assets/Notes-3.png'
+import shortly1 from '../assets/Shortly-1.png'
+import shortly2 from '../assets/Shortly-2.png'
+import shortly3 from '../assets/Shortly-3.png'
+
+
+export const GITHUB_URL_NOTES_APP = 'https://github.com/Bodyart23/note_taking_app'
+export const LIVE_URL_NOTES_APP = 'https://note-taking-app-eight-alpha.vercel.app/auth/log-in'
+
+export const GITHUB_URL_SHORTLY_LANDING = 'https://github.com/Bodyart23/url_shortener'
+export const LIVE_URL_SHORTLY_LANDING = 'https://url-shortener-two-virid.vercel.app/'
 
 export const GITHUB_URL = 'https://github.com/Bodyart23'
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/bohdan-dehtiar-752086163/'
@@ -16,7 +23,8 @@ export type Skill = {
 export type Project = {
   title: string
   tech: string[]
-  image: string
+  /** First image is the card thumbnail; all images open in the slideshow. */
+  images: string[]
   liveUrl: string
   repoUrl: string
 }
@@ -27,50 +35,23 @@ export const skills: Skill[] = [
   { name: 'JavaScript', experience: '4 Years Experience' },
   { name: 'Angular', experience: '4 Years Experience' },
   { name: 'React', experience: '1 Years Experience' },
+  { name: 'NextJS', experience: '1 Years Experience' },
 ]
 
 /** Update liveUrl and repoUrl with real demo and repository links when available. */
 export const projects: Project[] = [
   {
-    title: 'Design Portfolio',
-    tech: ['HTML', 'CSS'],
-    image: project1Large,
-    liveUrl: GITHUB_URL,
-    repoUrl: GITHUB_URL,
+    title: 'Notes Web App',
+    tech: ['NextJS', 'MongoDB', 'NextAuth', 'TailwindCSS'],
+    images: [notes1, notes2, notes3],
+    liveUrl: LIVE_URL_NOTES_APP,
+    repoUrl: GITHUB_URL_NOTES_APP,
   },
   {
-    title: 'E-learning Landing Page',
-    tech: ['HTML', 'CSS'],
-    image: project2Large,
-    liveUrl: GITHUB_URL,
-    repoUrl: GITHUB_URL,
-  },
-  {
-    title: 'Todo Web App',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    image: project3Large,
-    liveUrl: GITHUB_URL,
-    repoUrl: GITHUB_URL,
-  },
-  {
-    title: 'Entertainment Web App',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    image: project4Large,
-    liveUrl: GITHUB_URL,
-    repoUrl: GITHUB_URL,
-  },
-  {
-    title: 'Memory Game',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    image: project5Large,
-    liveUrl: GITHUB_URL,
-    repoUrl: GITHUB_URL,
-  },
-  {
-    title: 'Art Gallery Showcase',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    image: project6Large,
-    liveUrl: GITHUB_URL,
-    repoUrl: GITHUB_URL,
+    title: 'Shortly Landing Page',
+    tech: ['React'],
+    images: [shortly1, shortly2, shortly3],
+    liveUrl: LIVE_URL_SHORTLY_LANDING,
+    repoUrl: GITHUB_URL_SHORTLY_LANDING,
   },
 ]
